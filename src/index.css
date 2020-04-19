@@ -213,6 +213,15 @@ h2 {
   font-size: 1.5rem;
 }
 
+.result-error {
+  display: flex;
+  justify-content: center;
+}
+
+.result-error p {
+  color: red;
+}
+
 /*Spinner CSS*/
 
 .loader {

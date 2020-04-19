@@ -1,6 +1,6 @@
 import React from "react";
-import SearchBox from "../SearchBox/SearchBox";
-import SearchResults from "../SearchResults/SearchResults";
+import SearchBox from "../../Containers/SearchBox/SearchBox";
+import SearchResults from "../../Containers/SearchResults/SearchResults";
 
 const Home = () => {
   return (

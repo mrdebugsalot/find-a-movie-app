@@ -1,20 +1,13 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React from "react";
 import Routes from "./Routes/Routes";
 
-export class App extends Component {
-  render() {
-    return (
-      <>
-        <h2 className="app-header">Movie Finder</h2>
-        <Routes />
-      </>
-    );
-  }
-}
+const App = () => {
+  return (
+    <>
+      <h2 className="app-header">Movie Finder</h2>
+      <Routes />
+    </>
+  );
+};
 
-const mapStateToProps = (state) => ({});
-
-const mapDispatchToProps = dispatch => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

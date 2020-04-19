@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actions from "../store/actions/movieInfoActions";
+import * as actions from "../../store/actions/movieInfoActions";
 import { bindActionCreators } from "redux";
 import Card from "@material-ui/core/Card";
-import defaultMovieIcon from "../assets/movie-icon-png-6.jpg";
-import rottenTomatoesIcon from "../assets/1200px-Rotten_Tomatoes.svg.png";
-import metaScoreIcon from "../assets/1200px-Metacritic.svg.png";
+import defaultMovieIcon from "../../assets/movie-icon-png-6.jpg";
+import rottenTomatoesIcon from "../../assets/1200px-Rotten_Tomatoes.svg.png";
+import metaScoreIcon from "../../assets/1200px-Metacritic.svg.png";
+import { Strings } from "../../dataProvider/localize";
 
 export class MovieDetails extends Component {
   componentDidMount() {
@@ -79,15 +80,15 @@ export class MovieDetails extends Component {
             </div>
             <div className="people">
               <div className="people-class">
-                <label>Director:</label>
+                <label>{Strings.director_label_text}</label>
                 <p>{movieDetails.Director}</p>
               </div>
               <div className="people-class">
-                <label>Writer(s):</label>
+                <label>{Strings.writers_label_text}</label>
                 <p>{movieDetails.Writer}</p>
               </div>
               <div className="people-class">
-                <label>Actors:</label>
+                <label>{Strings.actors_label_text}</label>
                 <p>{movieDetails.Actors}</p>
               </div>
             </div>
@@ -102,7 +103,9 @@ export class MovieDetails extends Component {
                     width="auto"
                     alt="posterImg"
                   />
-                  <p className="ratings-text">{movieDetails.Ratings[1].Value}</p>
+                  <p className="ratings-text">
+                    {movieDetails.Ratings[1].Value}
+                  </p>
                 </div>
                 <div className="other-ratings-item">
                   <img
@@ -111,7 +114,9 @@ export class MovieDetails extends Component {
                     width="auto"
                     alt="posterImg"
                   />
-                  <p className="ratings-text">{movieDetails.Ratings[2].Value}</p>
+                  <p className="ratings-text">
+                    {movieDetails.Ratings[2].Value}
+                  </p>
                 </div>
               </div>
             ) : null}
@@ -119,7 +124,7 @@ export class MovieDetails extends Component {
         </div>
       </Card>
     ) : (
-      <div className="loader">Loading...</div>
+      <div className="loader">{Strings.loading_text}</div>
     );
   }
 }

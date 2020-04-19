@@ -1,19 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Pagination from "@material-ui/lab/Pagination";
-import * as searchActions from "../store/actions/searchActions";
-import * as movieInfoActions from "../store/actions/movieInfoActions";
+import * as searchActions from "../../store/actions/searchActions";
+import * as movieInfoActions from "../../store/actions/movieInfoActions";
 import { bindActionCreators } from "redux";
 import { Link } from "react-router-dom";
-import defaultIcon from "../assets/movie-icon-png-6.jpg";
+import defaultIcon from "../../assets/movie-icon-png-6.jpg";
 
 export class SearchResults extends Component {
-
   handlePageChange = (event, pageNumber) => {
-    this.props.searchActions.searchForMovies(
-      this.props.searchPhrase,
-      pageNumber
-    );
+    this.props.searchActions
+      .searchForMovies(this.props.searchPhrase, pageNumber)
+      .then((res) => {})
+      .catch((err) => {});
   };
 
   handleMovieClick = (item) => {};
@@ -64,7 +63,11 @@ export class SearchResults extends Component {
       </div>
     );
 
-    return this.props.movieList && this.props.movieList.length > 0 ? (
+    return this.props.searchFailed ? (
+      <div className="result-error">
+        <p>Please try again</p>
+      </div>
+    ) : this.props.movieList && this.props.movieList.length > 0 ? (
       <div className="srch-res">
         {gridView}
         {paginationView}
@@ -77,6 +80,7 @@ const mapStateToProps = (state) => ({
   movieList: state.search.movieList,
   totalPages: state.search.totalPages,
   searchPhrase: state.search.currentSearchPhrase,
+  searchFailed: state.search.searchFailed,
 });
 
 const mapDispatchToProps = (dispatch) => ({

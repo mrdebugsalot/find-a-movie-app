@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import TextField from "@material-ui/core/TextField";
 import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
-
+import { Strings } from "../../dataProvider/localize";
 import { bindActionCreators } from "redux";
-import * as actions from "../store/actions/searchActions";
+import * as actions from "../../store/actions/searchActions";
 
 class SearchBox extends Component {
   state = {
     searchPhrase: "",
+    loading: false,
   };
 
   componentDidMount() {
@@ -19,12 +20,28 @@ class SearchBox extends Component {
 
   handleKeyPress = (e) => {
     if (e.key === "Enter") {
-      this.props.actions.searchForMovies(this.state.searchPhrase);
+      this.setState({ loading: true });
+      this.props.actions
+        .searchForMovies(this.state.searchPhrase)
+        .then((res) => {
+          this.setState({ loading: false });
+        })
+        .catch((err) => {
+          this.setState({ loading: false });
+        });
     }
   };
 
   handleSearchClick = () => {
-    this.props.actions.searchForMovies(this.state.searchPhrase);
+    this.setState({ loading: true });
+    this.props.actions
+      .searchForMovies(this.state.searchPhrase)
+      .then((res) => {
+        this.setState({ loading: false });
+      })
+      .catch((err) => {
+        this.setState({ loading: false });
+      });
   };
 
   handleSearchChange = (e) => {
@@ -38,7 +55,7 @@ class SearchBox extends Component {
           <TextField
             onKeyPress={this.handleKeyPress}
             onChange={(e) => this.handleSearchChange(e)}
-            label="Type in a movie name..."
+            label={Strings.search_label_text}
             margin="normal"
             value={this.state.searchPhrase}
           />
@@ -48,9 +65,9 @@ class SearchBox extends Component {
             onClick={this.handleSearchClick}
             variant="contained"
             color="primary"
-            disabled={this.state.searchPhrase.length === 0}
+            disabled={this.state.searchPhrase.length === 0 || this.state.loading}
           >
-            Search
+            {Strings.search_btn_text}
           </Button>
         </div>
       </div>
