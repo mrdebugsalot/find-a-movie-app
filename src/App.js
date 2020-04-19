@@ -1,19 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import Routes from "./Routes/Routes";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-          Learn React
-      </header>
-    </div>
-  );
+export class App extends Component {
+  render() {
+    return (
+      <>
+        <h2 className="app-header">Movie Finder</h2>
+        <Routes />
+      </>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = (state) => ({});
+
+const mapDispatchToProps = dispatch => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
